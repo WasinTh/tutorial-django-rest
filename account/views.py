@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from account.models import Transaction
 
-# Create your views here.
+
+def current_balance_view(request):
+    balance = 0
+    for transaction in Transaction.objects.all():
+        if transaction.type == Transaction.Type.INCOME:
+            balance += transaction.amount
+        else:
+            balance -= transaction.amount
+
+    return HttpResponse(f"{balance} บาท")
