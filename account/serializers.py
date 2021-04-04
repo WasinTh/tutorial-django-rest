@@ -3,13 +3,10 @@ from rest_framework import serializers
 from account.models import Transaction
 
 
-class TransactionSerializer(serializers.Serializer):
-
-    id = serializers.IntegerField(read_only=True)
+class TransactionSerializer(serializers.ModelSerializer):
     created = serializers.DateTimeField(default=datetime.datetime.now())
-    amount = serializers.IntegerField()
-    note = serializers.CharField(required=False, allow_blank=True, default='')
-    type = serializers.ChoiceField(choices=Transaction.Type)
+    type_display = serializers.CharField(source='get_type_display', read_only=True)
 
-    def create(self, validated_data):
-        return Transaction.objects.create(**validated_data)
+    class Meta:
+        model = Transaction
+        fields = ['id', 'created', 'amount', 'note', 'type', 'type_display']

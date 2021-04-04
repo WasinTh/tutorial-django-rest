@@ -1,6 +1,9 @@
 import json
 from django.http import HttpResponse
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from account.models import Transaction
+from account.serializers import TransactionSerializer
 
 
 def current_balance_view(request):
@@ -14,14 +17,7 @@ def current_balance_view(request):
     return HttpResponse(json.dumps(data))
 
 
+@api_view(['GET'])
 def transaction_list_view(request):
-    data = list()
-    for transaction in Transaction.objects.all():
-        data.append({
-            'created': str(transaction.created),
-            'amount': transaction.amount,
-            'note': transaction.note,
-            'type': transaction.type
-        })
-
-    return HttpResponse(json.dumps(data))
+    serializer = TransactionSerializer(Transaction.objects.all(), many=True)
+    return Response(data=serializer.data)
