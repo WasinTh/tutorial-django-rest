@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics
-from account.models import Transaction
-from account.serializers import TransactionSerializer
+from account.models import Transaction, Customer
+from account.serializers import TransactionSerializer, CustomerSerializer
 
 
 def current_balance_view(request):
@@ -27,3 +27,8 @@ def transaction_list_view(request):
 class TransactionView(generics.ListCreateAPIView):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+
+
+class CustomerView(generics.ListCreateAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
