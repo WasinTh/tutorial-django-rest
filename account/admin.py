@@ -1,5 +1,10 @@
 from django.contrib import admin
-from account.models import Transaction
+from account.models import Transaction, Customer
+
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Transaction)
