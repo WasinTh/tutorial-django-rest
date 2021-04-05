@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'django_filters',
+    'django_extensions',
     'account',
 ]
+
+SHELL_PLUS = "ipython"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

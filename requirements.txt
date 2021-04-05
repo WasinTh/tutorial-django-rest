@@ -6,3 +6,5 @@ factory-boy
 pytest-django
 drf-yasg
 django-filter
+django-extensions
+ipython
