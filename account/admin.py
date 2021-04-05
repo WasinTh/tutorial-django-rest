@@ -4,7 +4,7 @@ from account.models import Transaction, Customer
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['user', 'current_amount']
 
 
 @admin.register(Transaction)

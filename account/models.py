@@ -11,6 +11,15 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.user}"
 
+    def re_calculate_current_amount(self):
+        self.current_amount = 0
+        for t in self.transaction_set.all():
+            if t.type == Transaction.Type.INCOME:
+                self.current_amount += t.amount
+            else:
+                self.current_amount -= t.amount
+        self.save()
+
 
 class Transaction(models.Model):
 
@@ -26,3 +35,7 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"{self.type} [{self.amount}]"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.customer.re_calculate_current_amount()
