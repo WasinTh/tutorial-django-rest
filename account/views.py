@@ -40,8 +40,10 @@ class CustomerView(generics.ListCreateAPIView):
 class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
+    filterset_fields = ['customer__id', 'customer__user__username']
 
 
 class CustomerViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    filterset_fields = ['user__username',]

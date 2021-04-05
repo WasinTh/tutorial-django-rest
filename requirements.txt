@@ -5,3 +5,4 @@ requests
 factory-boy
 pytest-django
 drf-yasg
+django-filter
