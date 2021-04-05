@@ -4,3 +4,4 @@ djangorestframework-jwt
 requests
 factory-boy
 pytest-django
+drf-yasg
