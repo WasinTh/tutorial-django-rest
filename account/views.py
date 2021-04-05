@@ -2,6 +2,7 @@ import json
 from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import viewsets
 from rest_framework import generics
 from account.models import Transaction, Customer
 from account.serializers import TransactionSerializer, CustomerSerializer
@@ -30,5 +31,15 @@ class TransactionView(generics.ListCreateAPIView):
 
 
 class CustomerView(generics.ListCreateAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+
+class TransactionViewSet(viewsets.ModelViewSet):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+
+
+class CustomerViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
