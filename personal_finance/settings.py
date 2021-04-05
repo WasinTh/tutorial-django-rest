@@ -41,14 +41,14 @@ INSTALLED_APPS = [
     'drf_yasg',
     'django_filters',
     'django_extensions',
+    'corsheaders',
     'account',
 ]
-
-SHELL_PLUS = "ipython"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,6 +119,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+SHELL_PLUS = "ipython"
+
+CORS_ALLOW_ALL_ORIGINS = DEBUG
 
 
 # Static files (CSS, JavaScript, Images)
